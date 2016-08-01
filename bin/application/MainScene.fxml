@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane prefHeight="700.0" prefWidth="760.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controller">
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edit">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Delete" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+   <center>
+      <SplitPane dividerPositions="0.5" prefHeight="160.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <VBox prefHeight="473.0" prefWidth="376.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Label text="Executed Commands">
+                           <VBox.margin>
+                              <Insets left="8.0" />
+                           </VBox.margin>
+                           <padding>
+                              <Insets bottom="2.0" right="2.0" top="2.0" />
+                           </padding>
+                        </Label>
+                        <ListView fx:id="list_executedCommands" onMouseClicked="#recordCommand" prefHeight="473.0" prefWidth="223.0" />
+                     </children>
+                  </VBox>
+               </children></AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <VBox prefHeight="473.0" prefWidth="376.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Label text="Recorded Commands" />
+                        <ListView fx:id="list_recordedCommands" onMouseClicked="#removeRecordedCommand" prefHeight="473.0" prefWidth="529.0" />
+                     </children>
+                  </VBox>
+               </children></AnchorPane>
+        </items>
+      </SplitPane>
+   </center>
+   <bottom>
+      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <TextField fx:id="field_command" onKeyPressed="#commandFieldAction" prefHeight="25.0" prefWidth="664.0" />
+                  <Button fx:id="btn_commandExecute" mnemonicParsing="false" onAction="#executeCommand" text="Execute">
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
+            <ListView fx:id="list_log" prefHeight="200.0" prefWidth="200.0" />
+            <HBox prefHeight="100.0" prefWidth="200.0" />
+         </children>
+      </VBox>
+   </bottom>
+</BorderPane>
