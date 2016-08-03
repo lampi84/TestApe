@@ -63,6 +63,14 @@ public class Controller implements Initializable {
 		recordedCommands.add(selectedCommand);
 	}
 	
+	@FXML
+	protected void runRecordedCommands(){
+		CommandInterpreter testRunner = new CommandInterpreter();
+		for (String recordedCommand : recordedCommands) {
+			testRunner.interpret(recordedCommand);
+		}
+	}
+	
 
 	@FXML
 	protected void removeRecordedCommand(){
