@@ -14,8 +14,10 @@ public class OpenBrowser extends BasicCommand {
 	public boolean execute() {
 		
 		switch (parameter[1]) {
-			case "chrome" : // TODO To be set as relative path
-							System.setProperty("webdriver.chrome.driver","C:\\Users\\patric\\workspace\\TestApe\\drivers\\chromedriver.exe");
+			case "chrome" : // Getting directory path
+							java.io.File file = new java.io.File("");
+							String chromeDriverPath = file.getAbsolutePath() + "\\drivers\\chromedriver.exe";
+							System.setProperty("webdriver.chrome.driver", chromeDriverPath);
 							interpreter.driver = new ChromeDriver();
 							break;
 		}

@@ -10,7 +10,11 @@ public class CloseBrowser extends BasicCommand {
 
 	@Override
 	public boolean execute() {
-		interpreter.driver.close();
+		switch (parameter[1]) {
+		case "chrome":	interpreter.driver.quit();
+						break;
+		}
+		
 		return true;
 	}
 
