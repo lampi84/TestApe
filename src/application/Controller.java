@@ -1,6 +1,11 @@
 package application;
 
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -13,6 +18,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.stage.FileChooser;
 
 public class Controller implements Initializable {
 	
@@ -76,6 +82,49 @@ public class Controller implements Initializable {
 	protected void removeRecordedCommand(){
 		int selctedIndex = list_recordedCommands.getSelectionModel().getSelectedIndex();
 		recordedCommands.remove(selctedIndex);
+	}
+	
+	@FXML
+	protected void saveTestCase(){
+		FileChooser fileChooser = new FileChooser();
+		
+		FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Testcase (*.testcase)", "*.testcase");
+        fileChooser.getExtensionFilters().add(extFilter);
+        
+		File selectedFile = fileChooser.showSaveDialog(null);
+		
+		try{
+			if (selectedFile != null) {
+				FileWriter writer = new FileWriter(selectedFile); 
+				for (String recordedCommand : recordedCommands) {
+					writer.write(recordedCommand + "\n");
+				}
+				writer.close();
+			}
+		}catch(IOException e){
+			System.out.println("Writing file failed");
+		}
+	}
+	
+	@FXML
+	protected void loadTestCase(){
+		FileChooser fileChooser = new FileChooser();
+		File selectedFile = fileChooser.showOpenDialog(null);
+		// When file is loaded all recorded Commands will be deleted
+		recordedCommands.clear();
+		
+		try{
+			if (selectedFile != null) {
+				BufferedReader br = new BufferedReader(new FileReader(selectedFile));
+		        String command;
+		        while((command = br.readLine()) != null) {
+		        	recordedCommands.add(command);
+		        }
+				br.close();
+			}
+		}catch(IOException e){
+			System.out.println("Loading file failed");
+		}
 	}
 
 	@Override
